@@ -21,7 +21,7 @@ contract Campaign {
     uint approvalsIdGlob = 0;
     mapping(address => bool) public approvers;
     mapping(uint => mapping(address => bool)) requestApprovals;
-    uint approversCount = 0;
+    uint public approversCount = 0;
 
     modifier restricted() {
         require(msg.sender == manager, "Only the manager may access this functionality");
@@ -37,7 +37,7 @@ contract Campaign {
         require(msg.value >= minimumContribution, string.concat("Need to contribute at least ", Strings.toString(minimumContribution), " wei"));
 
         approvers[msg.sender] = true;
-        approvalCount++;
+        approversCount++;
     }
 
     function createRequest(
